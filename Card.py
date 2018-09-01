@@ -15,3 +15,7 @@ class Card:
             self._mana = {'base': val, 'current': val}
 
         self._mana['current'] = val
+
+
+if __name__ == '__main__':
+    pass
