@@ -8,9 +8,9 @@ class Player:
 class Game:
     target_types = ("Minion", "Hero")
 
-    player1 = Player()
-    player2 = Player()
+    def __init__(self):
+        self.player1 = Player()
+        self.player2 = Player()
 
-    @staticmethod
-    def minion_count():
-        return len(Game.player_battlefield) + len(Game.opponent_battlefield)
+    def minion_count(self):
+        return len(self.player1.battlefield) + len(self.player2.battlefield)
