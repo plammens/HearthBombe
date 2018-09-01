@@ -9,6 +9,7 @@ class Minion(Card):
         self.attack = attack
         self.health = health
 
+    def summon(self):
         Game.player_battlefield.append(self)
 
     def __del__(self):
