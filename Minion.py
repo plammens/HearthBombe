@@ -3,14 +3,11 @@ from Card import Card
 
 
 class Minion(Card):
-    def __init__(self, mana, attack, health, **kwargs):
+    def __init__(self, mana, attack, health):
         super(Minion, self).__init__(mana)
 
         self.attack = attack
         self.health = health
-
-    def summon(self):
-        Game.player_battlefield.append(self)
 
     def __del__(self):
         Game.player_battlefield.remove(self)
@@ -40,8 +37,17 @@ class Minion(Card):
         if self.health <= 0:
             del self
 
+    def summon(self):
+        Game.player_battlefield.append(self)
+
+    def play(self):
+        self.battlecry()
+        self.summon()
 
     """Special abilities: """
+
+    def battlecry(self):
+        pass
 
     def deathrattle(self):
         pass
