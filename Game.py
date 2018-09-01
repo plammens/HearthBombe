@@ -1,11 +1,15 @@
+class Player:
+    def __init__(self):
+        self.hand = []
+        self.battlefield = []
+        self.health = 30
+
+
 class Game:
-    hand = 9
     target_types = ("Minion", "Hero")
 
-    player_battlefield = []
-    opponent_battlefield = []
-
-    player_hand = []
+    player1 = Player()
+    player2 = Player()
 
     @staticmethod
     def minion_count():
