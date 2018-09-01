@@ -6,3 +6,7 @@ class Game:
     opponent_battlefield = []
 
     player_hand = []
+
+    @staticmethod
+    def minion_count():
+        return len(Game.player_battlefield) + len(Game.opponent_battlefield)
