@@ -4,3 +4,5 @@ class Game:
 
     player_battlefield = []
     opponent_battlefield = []
+
+    player_hand = []
