@@ -1,15 +1,5 @@
 # from Minion import Minion
-
-
-class Callable_List(list):
-    def __init__(self, *args):
-        list.__init__(self, *args)
-
-    def append(self, val):
-        if callable(val):
-            list.append(self, val)
-        else:
-            raise TypeError
+from Utils import Callable_List
 
 
 class Player:
@@ -26,7 +16,7 @@ class Game:
         self.player = Player()
         self.opponent = Player()
 
-        self._play_spell_effects = []
+        self._play_spell_effects = Callable_List()
 
     def minion_count(self):
         return len(self.player.battlefield) + len(self.opponent.battlefield)
