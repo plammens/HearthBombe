@@ -9,7 +9,7 @@ class Minion(Card):
         self.attack = attack
         self.health = health
 
-    def __del__(self):
+    def destroy(self):
         self.deathrattle()
         if self in main_game.player.battlefield:
             main_game.player.battlefield.remove(self)
@@ -37,7 +37,7 @@ class Minion(Card):
         self._health = val
 
         if self.health <= 0:
-            del self
+            self.destroy()
 
     def summon(self):
         main_game.player.battlefield.append(self)
