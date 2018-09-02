@@ -22,6 +22,7 @@ class Gelbins_Coil(Minion):
         super().__init__(1, 1, 2)
 
         def play_spell_effect():
+            """Deal 1 damage to a random enemy minion"""
             random.choice(main_game.player2.battlefield).damage(1)
 
-        main_game.play_spell_effects.append()
+        main_game.play_spell_effects.append(play_spell_effect)
