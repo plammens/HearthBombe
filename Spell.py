@@ -19,5 +19,5 @@ class Spell(Card):
             self._target = None
 
     def play(self):
-        super().__init__(self)
+        super().play()
         main_game.run_spell_effects()
