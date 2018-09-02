@@ -1,3 +1,17 @@
+# from Minion import Minion
+
+
+class Callable_List(list):
+    def __init__(self, *args):
+        list.__init__(self, *args)
+
+    def append(self, val):
+        if callable(val):
+            list.append(self, val)
+        else:
+            raise TypeError
+
+
 class Player:
     def __init__(self):
         self.hand = []
@@ -6,11 +20,28 @@ class Player:
 
 
 class Game:
-    target_types = ("Minion", "Hero")
+    target_types = ("Minion", "Player")
 
     def __init__(self):
         self.player1 = Player()
         self.player2 = Player()
 
+        self._play_spell_effects = []
+
     def minion_count(self):
         return len(self.player1.battlefield) + len(self.player2.battlefield)
+
+    @property
+    def play_spell_effects(self):
+        return self._play_spell_effects
+
+    @play_spell_effects.setter
+    def play_spell_effects(self, val):
+        raise NotImplemented
+
+    def run_spell_effects(self):
+        for effect in self.play_spell_effects:
+            effect()
+
+
+main_game = Game()
