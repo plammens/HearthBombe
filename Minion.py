@@ -45,6 +45,9 @@ class Minion(Card):
         self.battlecry()
         self.summon()
 
+    def damage(self, dmg: int):
+        self.health -= dmg
+
     """Special abilities: """
 
     def battlecry(self):
