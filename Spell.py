@@ -1,5 +1,5 @@
 from Card import Card
-from Game import Game
+from Game import main_game
 
 
 class Spell(Card):
@@ -17,3 +17,7 @@ class Spell(Card):
             self._target = val
         else:
             self._target = None
+
+    def play(self):
+        super().__init__(self)
+        main_game.run_spell_effects()

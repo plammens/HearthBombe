@@ -16,6 +16,8 @@ class Card:
 
         self._mana['current'] = val
 
+    def play(self):
+        pass
 
 if __name__ == '__main__':
     pass

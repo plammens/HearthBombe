@@ -43,6 +43,7 @@ class Minion(Card):
         main_game.player.battlefield.append(self)
 
     def play(self):
+        super().__init__(self)
         self.battlecry()
         self.summon()
 
