@@ -23,13 +23,13 @@ class Game:
     target_types = ("Minion", "Player")
 
     def __init__(self):
-        self.player1 = Player()
-        self.player2 = Player()
+        self.player = Player()
+        self.opponent = Player()
 
         self._play_spell_effects = []
 
     def minion_count(self):
-        return len(self.player1.battlefield) + len(self.player2.battlefield)
+        return len(self.player.battlefield) + len(self.opponent.battlefield)
 
     @property
     def play_spell_effects(self):
