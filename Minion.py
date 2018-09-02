@@ -11,7 +11,8 @@ class Minion(Card):
 
     def __del__(self):
         self.deathrattle()
-        main_game.player_battlefield.remove(self)
+        if self in main_game.player.battlefield:
+            main_game.player.battlefield.remove(self)
 
     @property
     def attack(self):
