@@ -17,7 +17,7 @@ class Possessed_Villager(Minion):
         Shadowbeast().summon()
 
 
-class Gelbins_Coil(Minion):
+class Gelbin_Coil(Minion):
     def __init__(self):
         super().__init__(1, 1, 2)
 
