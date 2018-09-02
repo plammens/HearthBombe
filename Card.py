@@ -1,5 +1,5 @@
 class Card:
-    def __init__(self, mana):
+    def __init__(self, mana: int):
         self.mana = mana
 
     @property

@@ -1,9 +1,9 @@
 from Card import Card
-from Game import main_game
+from Game import Game, main_game
 
 
 class Spell(Card):
-    def __init__(self, mana, **kwargs):
+    def __init__(self, mana: int, **kwargs):
         super(Spell, self).__init__(mana)
         self.target = kwargs.get('target', None)
 
