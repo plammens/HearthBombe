@@ -1,4 +1,4 @@
-from Game import Game
+from Game import main_game
 from Card import Card
 
 
@@ -10,7 +10,7 @@ class Minion(Card):
         self.health = health
 
     def __del__(self):
-        Game.player_battlefield.remove(self)
+        main_game.player_battlefield.remove(self)
 
     @property
     def attack(self):
@@ -38,7 +38,7 @@ class Minion(Card):
             del self
 
     def summon(self):
-        Game.player_battlefield.append(self)
+        main_game.player_battlefield.append(self)
 
     def play(self):
         self.battlecry()
