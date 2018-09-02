@@ -10,6 +10,7 @@ class Minion(Card):
         self.health = health
 
     def __del__(self):
+        self.deathrattle()
         main_game.player_battlefield.remove(self)
 
     @property
