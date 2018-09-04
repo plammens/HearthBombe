@@ -7,7 +7,7 @@ from Spell import Spell
 
 class Holy_Smite(Spell):
     def __init__(self):
-        super().__init__(0, Minion, Player)
+        super().__init__(1, Minion, Player)
 
     def play(self, **kwargs):
         try:
@@ -23,7 +23,7 @@ class Holy_Smite(Spell):
 
 class Vivid_Nightmare(Spell):
     def __init__(self):
-        super().__init__(0, Minion)
+        super().__init__(3, Minion)
 
     def play(self, **kwargs):
         try:

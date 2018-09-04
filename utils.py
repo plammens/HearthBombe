@@ -20,6 +20,21 @@ class Hand(list):
     def __init__(self, holder) -> None:
         list.__init__(self)
         self.holder = holder
+        self._mana_bias = 0
+
+    @property
+    def mana_bias(self):
+        return self._mana_bias
+
+    @mana_bias.setter
+    def mana_bias(self, val):
+        if type(val) is not int:
+            raise TypeError
+
+        self._mana_bias = val
+
+        for card in self:
+            card.mana = card._mana['base'] + val
 
     def initialize(self, *cards):
         self.clear()
@@ -28,6 +43,8 @@ class Hand(list):
             card.owner = self.holder
 
     def append(self, card):
+        if len(self) == 7:
+            raise RuntimeError("Max minions on battlefield reached")
         list.append(self, card)
         card.player = self.holder
 
@@ -50,20 +67,16 @@ class Battlefield(list):
     def initialize(self, *minions):
         self.clear()
         for minion in minions:
-            self.append(minion)
+            minion.summon(self.controller)
             minion.owner = self.controller
 
     def append(self, minion):
         list.append(self, minion)
-        minion.player = self.controller
-
-    def extend(self, iterable):
-        for minion in iterable:
-            self.append(minion)
-
-    def add(self, minion):
-        list.append(self, minion)
         minion.controller = self.controller
+
+    """def extend(self, iterable):
+        for minion in iterable:
+            self.append(minion)"""
 
     def remove(self, minion):
         try:

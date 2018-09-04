@@ -1,3 +1,7 @@
+"""
+TODO: change static effects to own object
+"""
+
 import random
 
 from Game import main_game
@@ -35,3 +39,16 @@ class Test_Subject(Minion):
     def deathrattle(self):
         super().deathrattle()
         self.controller.hand.extend(self.spells_cast_upon)
+
+
+class Radiant_Elemental(Minion):
+    def __init__(self):
+        super().__init__(2, 2, 3)
+
+    def summon(self, controller):
+        super().summon(controller)
+        self.controller.hand.mana_bias -= 1
+
+    def destroy(self):
+        self.controller.hand.mana_bias += 1
+        super().destroy()

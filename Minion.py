@@ -68,7 +68,7 @@ class Minion(Card):
     """Methods"""
 
     def summon(self, controller):
-        controller.battlefield.add(self)
+        controller.battlefield.append(self)
 
     def play(self):
         super().play()
