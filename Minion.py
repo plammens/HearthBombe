@@ -4,6 +4,7 @@ TODO: summmoning deathrattle as 'player', or 'controller'?
 
 
 from Card import Card
+from Player import Player
 
 
 class Minion(Card):
@@ -19,6 +20,8 @@ class Minion(Card):
         self.controller.battlefield.remove(self)
         self.deathrattle()
 
+    """Properties: attack, health, controller"""
+
     @property
     def attack(self):
         return self._attack
@@ -28,29 +31,47 @@ class Minion(Card):
         if type(val) is not int or val < 0:
             raise ValueError
 
-        self._attack = val
+        if not hasattr(self, '_attack'):
+            self._attack = {'base': val, 'current': val}
+
+        self._attack['current'] = val
 
     @property
     def health(self):
-        return self._health
+        return self._health['current']
 
     @health.setter
     def health(self, val):
         if type(val) is not int:
             raise TypeError
 
-        self._health = val
+        if not hasattr(self, '_health'):
+            self._health = {'base': val, 'current': val}
 
-        if self.health <= 0:
+        self._health['current'] = val
+
+        if self._health['current'] <= 0:
             self.destroy()
 
-    def summon(self):
-        self.player.battlefield.add(self)
+    @property
+    def controller(self):
+        return self._controller
+
+    @controller.setter
+    def controller(self, val):
+        if not (val is None or type(val) is Player):
+            raise TypeError
+        self._controller = val
+
+    """Methods"""
+
+    def summon(self, controller):
+        controller.battlefield.add(self)
 
     def play(self):
         super().play()
         self.battlecry()
-        self.summon()
+        self.summon(self.player)
 
     def damage(self, dmg: int):
         self.health -= dmg
