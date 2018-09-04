@@ -1,5 +1,6 @@
 from Card import Card
 from Game import main_game, Game
+from Minion import Minion
 
 
 class Spell(Card):
@@ -24,6 +25,8 @@ class Spell(Card):
             raise ValueError("Invalid target")
 
     def play(self, **kwargs):
+        super().play()
+
         try:
             target = kwargs['target']
         except KeyError:
@@ -35,11 +38,11 @@ class Spell(Card):
             raise RuntimeError("No action specified by %s's play() method " % type(self))
 
         self.target_check(target)
+        if hasattr(target, 'spells_cast_upon'):
+            target.spells_cast_upon.append(self)
 
         if (action is not None) and (not callable(action)):
             raise ValueError("Non-callable action")
-
-        super().play()
 
         if action is not None:
             action()

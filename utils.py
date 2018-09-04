@@ -24,9 +24,16 @@ class Hand(list):
     def initialize(self, *cards):
         self.clear()
         for card in cards:
-            list.append(self, card)
-            card.player = self.holder
+            self.append(card)
             card.owner = self.holder
+
+    def append(self, card):
+        list.append(self, card)
+        card.player = self.holder
+
+    def extend(self, iterable):
+        for card in iterable:
+            self.append(card)
 
     def remove(self, card):
         try:
@@ -43,7 +50,16 @@ class Battlefield(list):
     def initialize(self, *minions):
         self.clear()
         for minion in minions:
-            self.add(minion)
+            self.append(minion)
+            minion.owner = self.controller
+
+    def append(self, minion):
+        list.append(self, minion)
+        minion.player = self.controller
+
+    def extend(self, iterable):
+        for minion in iterable:
+            self.append(minion)
 
     def add(self, minion):
         list.append(self, minion)

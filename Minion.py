@@ -16,6 +16,8 @@ class Minion(Card):
 
         self.controller = None
 
+        self.spells_cast_upon = []
+
     def destroy(self):
         self.controller.battlefield.remove(self)
         self.deathrattle()
