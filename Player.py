@@ -7,6 +7,7 @@ class Player:
         self.battlefield = Battlefield(self)
         self.health = 30
 
-    def play_card(self, index, target=None):
+    def play_card(self, index, **kwargs):
         """Shortcut for playing nth card in hand"""
+        target = kwargs.get('target', None)
         self.hand.pop(index).play(target=target)

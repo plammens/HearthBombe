@@ -24,8 +24,15 @@ class Spell(Card):
             raise ValueError("Invalid target")
 
     def play(self, **kwargs):
-        target = kwargs.get('target', None)
-        action = kwargs.get('action', None)
+        try:
+            target = kwargs['target']
+        except KeyError:
+            raise RuntimeError("No target specified by %s's play() method " % type(self))
+
+        try:
+            action = kwargs['action']
+        except KeyError:
+            raise RuntimeError("No action specified by %s's play() method " % type(self))
 
         self.target_check(target)
 
