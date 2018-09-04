@@ -1,6 +1,8 @@
 class Card:
     def __init__(self, mana: int):
         self.mana = mana
+        self.player = None
+        self.owner = None
 
     @property
     def mana(self):

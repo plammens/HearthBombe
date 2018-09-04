@@ -1,4 +1,3 @@
-from Game import main_game
 from Card import Card
 
 
@@ -9,10 +8,11 @@ class Minion(Card):
         self.attack = attack
         self.health = health
 
+        self.controller = None
+
     def destroy(self):
         self.deathrattle()
-        if self in main_game.player.battlefield:
-            main_game.player.battlefield.remove(self)
+        self.controller.battlefield.remove(self)
 
     @property
     def attack(self):
@@ -40,7 +40,7 @@ class Minion(Card):
             self.destroy()
 
     def summon(self):
-        main_game.player.battlefield.append(self)
+        self.player.battlefield.add(self)
 
     def play(self):
         super().play()
