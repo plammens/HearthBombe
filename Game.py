@@ -1,12 +1,5 @@
-# from Minion import Minion
-from Utils import Callable_List
-
-
-class Player:
-    def __init__(self):
-        self.hand = []
-        self.battlefield = []
-        self.health = 30
+from Player import Player
+from utils import Callable_List
 
 
 class Game:
