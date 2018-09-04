@@ -9,4 +9,4 @@ class Player:
 
     def play_card(self, index):
         """Shortcut for playing nth card in hand"""
-        self.hand[index].play()
+        self.hand.pop(index).play()
