@@ -1,3 +1,8 @@
+"""
+TODO: summmoning deathrattle as 'player', or 'controller'?
+"""
+
+
 from Card import Card
 
 

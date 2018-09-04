@@ -1,7 +1,7 @@
 import random
 
-from Minion import Minion
 from Game import main_game
+from Minion import Minion
 
 
 class Shadowbeast(Minion):
@@ -14,7 +14,9 @@ class Possessed_Villager(Minion):
         super().__init__(1, 1, 1)
 
     def deathrattle(self):
-        Shadowbeast().summon()
+        s = Shadowbeast()
+        s.player = self.controller
+        s.summon()
 
 
 class Gelbin_Coil(Minion):
