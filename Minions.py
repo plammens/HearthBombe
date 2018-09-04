@@ -14,9 +14,7 @@ class Possessed_Villager(Minion):
         super().__init__(1, 1, 1)
 
     def deathrattle(self):
-        s = Shadowbeast()
-        s.player = self.controller
-        s.summon()
+        Shadowbeast().summon(self.controller)
 
 
 class Gelbin_Coil(Minion):
