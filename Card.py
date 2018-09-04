@@ -18,7 +18,7 @@ class Card:
 
         self._mana['current'] = val
 
-    def play(self):
+    def play(self, **kwargs):
         pass
 
 

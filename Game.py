@@ -1,9 +1,14 @@
+"""
+TODO: check target_types types as
+"""
+
+from Minion import Minion
 from Player import Player
 from utils import Callable_List
 
 
 class Game:
-    target_types = ("Minion", "Player")
+    target_types = {Minion, Player}
 
     def __init__(self):
         self.player = Player()

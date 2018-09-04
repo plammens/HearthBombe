@@ -5,10 +5,6 @@ TODO: separate from utils?
 """
 
 
-# from Card import Card
-# from Minion import Minion
-
-
 class Callable_List(list):
     def __init__(self, *args):
         list.__init__(self, *args)
@@ -57,4 +53,4 @@ class Battlefield(list):
         try:
             list.remove(self, minion)
         except ValueError:
-            raise RuntimeError("Removing missing minion from battlefield!")
+            raise ValueError("Removing missing minion from battlefield!")

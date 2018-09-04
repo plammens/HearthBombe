@@ -16,8 +16,8 @@ class Minion(Card):
         self.controller = None
 
     def destroy(self):
-        self.deathrattle()
         self.controller.battlefield.remove(self)
+        self.deathrattle()
 
     @property
     def attack(self):
