@@ -6,6 +6,7 @@ import random
 
 from Game import main_game
 from Minion import Minion
+from StaticEffect import StaticEffect
 
 
 class Shadowbeast(Minion):
@@ -44,11 +45,4 @@ class TestSubject(Minion):
 class RadiantElemental(Minion):
     def __init__(self):
         super().__init__(2, 2, 3)
-
-    def summon(self, controller):
-        super().summon(controller)
-        self.controller.hand.mana_bias -= 1
-
-    def destroy(self):
-        self.controller.hand.mana_bias += 1
-        super().destroy()
+        self.static_effect = StaticEffect(mana_bias=-1)
