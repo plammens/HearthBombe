@@ -1,6 +1,5 @@
 from Card import Card
 from Game import main_game, Game
-from Minion import Minion
 
 
 class Spell(Card):

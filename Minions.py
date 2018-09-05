@@ -13,7 +13,7 @@ class Shadowbeast(Minion):
         super().__init__(1, 1, 1)
 
 
-class Possessed_Villager(Minion):
+class PossessedVillager(Minion):
     def __init__(self):
         super().__init__(1, 1, 1)
 
@@ -21,7 +21,7 @@ class Possessed_Villager(Minion):
         Shadowbeast().summon(self.controller)
 
 
-class Gelbin_Coil(Minion):
+class GelbinCoil(Minion):
     def __init__(self):
         super().__init__(1, 1, 2)
 
@@ -32,16 +32,16 @@ class Gelbin_Coil(Minion):
         main_game.play_spell_effects.append(play_spell_effect)
 
 
-class Test_Subject(Minion):
+class TestSubject(Minion):
     def __init__(self):
-        super(Test_Subject, self).__init__(1, 0, 2)
+        super(TestSubject, self).__init__(1, 0, 2)
 
     def deathrattle(self):
         super().deathrattle()
         self.controller.hand.extend(self.spells_cast_upon)
 
 
-class Radiant_Elemental(Minion):
+class RadiantElemental(Minion):
     def __init__(self):
         super().__init__(2, 2, 3)
 

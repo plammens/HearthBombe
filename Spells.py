@@ -5,7 +5,7 @@ from Player import Player
 from Spell import Spell
 
 
-class Holy_Smite(Spell):
+class HolySmite(Spell):
     def __init__(self):
         super().__init__(1, Minion, Player)
 
@@ -21,7 +21,7 @@ class Holy_Smite(Spell):
         super().play(action=action, target=target)
 
 
-class Vivid_Nightmare(Spell):
+class VividNightmare(Spell):
     def __init__(self):
         super().__init__(3, Minion)
 

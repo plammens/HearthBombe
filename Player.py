@@ -15,7 +15,7 @@ class Player:
         self.hand.pop(index).play(target=target)
 
 
-class Player_Property(list):
+class PlayerProperty(list):
     def __init__(self, owner) -> None:
         list.__init__(self)
         self.owner = owner
@@ -40,7 +40,7 @@ class Player_Property(list):
         list.remove(self, card)
 
 
-class Hand(Player_Property):
+class Hand(PlayerProperty):
     def __init__(self, holder) -> None:
         super().__init__(holder)
         self._mana_bias = 0
@@ -70,7 +70,7 @@ class Hand(Player_Property):
             raise RuntimeError("Removing missing card from hand!")
 
 
-class Battlefield(Player_Property):
+class Battlefield(PlayerProperty):
     def __init__(self, player) -> None:
         super().__init__(player)
         self.controller = player

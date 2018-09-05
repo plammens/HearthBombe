@@ -3,7 +3,7 @@ TODO: check target_types types as
 """
 
 from Minion import Minion
-from Player import Player
+from Player import *
 from utils import Callable_List
 
 
