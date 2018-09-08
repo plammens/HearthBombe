@@ -8,11 +8,11 @@ from Player import Player
 
 
 class Minion(Card):
-    def __init__(self, mana_cost, attack, health):
+    def __init__(self, mana_cost: int, attack: int, health: int):
         super(Minion, self).__init__(mana_cost)
 
-        self.attack = attack
-        self.health = health
+        self._attack = {'base': attack, 'current': attack}
+        self._health = {'base': health, 'current': health}
 
         self._controller = None
 
@@ -34,10 +34,7 @@ class Minion(Card):
         if type(val) is not int or val < 0:
             raise ValueError
 
-        if not hasattr(self, '_attack'):
-            self._attack = {'base': val, 'current': val}
-
-        self._attack['current'] = val
+        self._attack['current'] = max(val, 0)
 
     @property
     def health(self):
@@ -48,10 +45,7 @@ class Minion(Card):
         if type(val) is not int:
             raise TypeError
 
-        if not hasattr(self, '_health'):
-            self._health = {'base': val, 'current': val}
-
-        self._health['current'] = val
+        self._health['current'] = min(val, self._health['base'])
 
         if self._health['current'] <= 0:
             self.destroy()
