@@ -20,7 +20,8 @@ class Card:
         self._mana_cost['current'] = val
 
     def play(self, **kwargs):
-        pass
+        assert self.mana_cost <= self.player.mana
+        self.player.mana -= self.mana_cost
 
 
 if __name__ == '__main__':
