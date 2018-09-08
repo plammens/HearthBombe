@@ -1,5 +1,4 @@
 """
-TODO: change static effects to own object
 """
 
 import random

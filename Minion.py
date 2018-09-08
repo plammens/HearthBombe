@@ -1,5 +1,4 @@
 """
-TODO: summmoning deathrattle as 'player', or 'controller'?
 """
 
 import copy
