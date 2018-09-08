@@ -27,7 +27,7 @@ class Minion(Card):
 
     @property
     def attack(self):
-        return self._attack
+        return self._attack['current']
 
     @attack.setter
     def attack(self, val):
