@@ -17,7 +17,7 @@ class Player:
 
     @mana.setter
     def mana(self, val):
-        self._mana = min(max(val, 0), self._mana['total'])
+        self._mana['available'] = min(max(val, 0), self._mana['total'])
 
     def play_card(self, index, **kwargs):
         """Shortcut for playing nth card in hand"""
