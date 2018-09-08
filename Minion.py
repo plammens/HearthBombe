@@ -2,6 +2,7 @@
 TODO: summmoning deathrattle as 'player', or 'controller'?
 """
 
+import copy
 
 from Card import Card
 from Player import Player
@@ -75,6 +76,21 @@ class Minion(Card):
         super().play()
         self.battlecry()
         self.summon(self.player)
+
+    to_be_referenced = {'player', 'owner', '_controller'}
+
+    def copy(self):
+        copy_ = type(self)()
+
+        for attr in self.__dict__:
+            if attr not in Minion.to_be_referenced:
+                # Make an actual copy of the attribute
+                copy_.__dict__[attr] = copy.copy(self.__dict__[attr])
+            else:
+                # Copy reference
+                copy_.__dict__[attr] = self.__dict__[attr]
+
+        return copy_
 
     def damage(self, dmg: int):
         self.health -= dmg
