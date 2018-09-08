@@ -9,6 +9,15 @@ class Player:
         self.hand = Hand(self)
         self.battlefield = Battlefield(self)
         self.health = 30
+        self._mana = {'total': 0, 'available': 0}
+
+    @property
+    def mana(self):
+        return self._mana['available']
+
+    @mana.setter
+    def mana(self, val):
+        self._mana = min(max(val, 0), self._mana['total'])
 
     def play_card(self, index, **kwargs):
         """Shortcut for playing nth card in hand"""
