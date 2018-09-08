@@ -1,5 +1,4 @@
 """
-TODO: check target_types types as
 """
 
 from Minion import Minion

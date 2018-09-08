@@ -1,5 +1,6 @@
 """
 TODO: Hand, Battlefield: change RuntimeError to more specific exception
+TODO: mana crystals
 """
 
 
@@ -77,10 +78,6 @@ class Battlefield(PlayerProperty):
     def append(self, minion, **kwargs):
         super().append(minion, max_cards=7)
         minion.controller = self.owner
-
-        if minion.static_effect is not None:
-            minion.static_effect.player = self.owner
-            minion.static_effect.activate()
 
     def remove(self, minion):
         try:
