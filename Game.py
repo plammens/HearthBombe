@@ -17,8 +17,13 @@ class Game:
 
         self._play_spell_effects = Callable_List()
 
+    @property
     def minion_count(self):
         return len(self.player.battlefield) + len(self.opponent.battlefield)
+
+    @property
+    def characters(self):
+        return self.player.battlefield + self.opponent.battlefield + [self.player, self.opponent]
 
     @property
     def play_spell_effects(self):
