@@ -15,7 +15,7 @@ class Minion(Card):
         self.attack = attack
         self.health = health
 
-        self.controller = None
+        self._controller = None
 
         self.spells_cast_upon = []
         self.static_effect = None
@@ -65,7 +65,11 @@ class Minion(Card):
     def controller(self, val):
         if not (val is None or type(val) is Player):
             raise TypeError
+
         self._controller = val
+
+        if self.static_effect is not None:
+            self.static_effect.player = self.player
 
     """Methods"""
 
