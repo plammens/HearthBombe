@@ -1,6 +1,8 @@
 """
 """
 
+from copy import deepcopy
+
 from Minion import Minion
 from Player import *
 from utils import Callable_List
@@ -32,3 +34,12 @@ class Game:
 
 
 main_game = Game()
+
+
+class GameStatus:
+    def __init__(self, game: Game = None):
+        if game is None:
+            game = deepcopy(main_game)
+        self.game = game
+        self.inspected = False
+        self.steps = []
