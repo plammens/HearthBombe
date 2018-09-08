@@ -8,8 +8,8 @@ from Game import main_game, Game
 
 
 class Spell(Card):
-    def __init__(self, mana: int, **kwargs):
-        super(Spell, self).__init__(mana)
+    def __init__(self, mana_cost: int, **kwargs):
+        super(Spell, self).__init__(mana_cost)
         self.target_types = kwargs.get('target_types', None)
 
     @property

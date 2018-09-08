@@ -1,23 +1,23 @@
 class Card:
-    def __init__(self, mana: int):
-        self.mana = mana
+    def __init__(self, mana_cost: int):
+        self.mana_cost = mana_cost
         self.player = None
         self.owner = None
 
     @property
-    def mana(self):
-        mana = self._mana['current']
+    def mana_cost(self):
+        mana = self._mana_cost['current']
         return mana if mana > 0 else 0
 
-    @mana.setter
-    def mana(self, val: int):
+    @mana_cost.setter
+    def mana_cost(self, val: int):
         if type(val) is not int:
             raise TypeError
 
-        if not hasattr(self, '_mana'):
-            self._mana = {'base': val, 'current': val}
+        if not hasattr(self, '_mana_cost'):
+            self._mana_cost = {'base': val, 'current': val}
 
-        self._mana['current'] = val
+        self._mana_cost['current'] = val
 
     def play(self, **kwargs):
         pass

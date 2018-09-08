@@ -8,8 +8,8 @@ from Player import Player
 
 
 class Minion(Card):
-    def __init__(self, mana, attack, health):
-        super(Minion, self).__init__(mana)
+    def __init__(self, mana_cost, attack, health):
+        super(Minion, self).__init__(mana_cost)
 
         self.attack = attack
         self.health = health

@@ -1,6 +1,6 @@
 """
 TODO: Hand, Battlefield: change RuntimeError to more specific exception
-TODO: mana crystals
+TODO: mana_cost crystals
 """
 
 
@@ -58,7 +58,7 @@ class Hand(PlayerProperty):
         self._mana_bias = val
 
         for card in self:
-            card.mana = card._mana['base'] + val
+            card.mana_cost = card._mana['base'] + val
 
     def append(self, card, **kwargs):
         super().append(card, max_cards=10)
