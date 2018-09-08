@@ -22,7 +22,3 @@ class Card:
     def play(self, **kwargs):
         assert self.mana_cost <= self.player.mana, "Not enough mana"
         self.player.mana -= self.mana_cost
-
-
-if __name__ == '__main__':
-    pass
