@@ -69,7 +69,7 @@ class Minion(Card):
         self._controller = val
 
         if self.static_effect is not None:
-            self.static_effect.player = self.player
+            self.static_effect.controller = self._controller
 
     """Methods"""
 
