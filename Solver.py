@@ -11,7 +11,7 @@ main_game = main_game
 
 
 def solve(objective: str):
-    """Algorithm for solving puzzles"""
+    """Brute-force algorithm for solving puzzles. Analogous to DFS."""
     global main_game
 
     states = [GameStatus(main_game)]
