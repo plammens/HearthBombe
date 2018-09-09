@@ -33,7 +33,6 @@ class Player:
     def mana(self, val):
         self._mana['available'] = min(max(val, 0), self._mana['total'])
 
-
     """Methods"""
 
     def play_card_by_index(self, index, **kwargs):
@@ -45,6 +44,11 @@ class Player:
         """Play first card in hand with same attributes as card"""
         target = kwargs.get('target', None)
         self.hand.get_card(card_blueprint).play(target=target)
+
+    def play_card_by_type(self, c_type, **kwargs):
+        """Play first card in hand of given type"""
+        target = kwargs.get('target', None)
+        self.hand.get_card_by_type(c_type).play(target=target)
 
     def run_spell_effects(self):
         for effect in self.play_spell_effects:
@@ -81,6 +85,12 @@ class PlayerProperty(list):
     def get_card(self, card_blueprint):
         for card in self:
             if card == card_blueprint:
+                return card
+        raise LookupError("Card not found")
+
+    def get_card_by_type(self, c_type):
+        for card in self:
+            if isinstance(card, c_type):
                 return card
         raise LookupError("Card not found")
 
