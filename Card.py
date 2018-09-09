@@ -7,6 +7,9 @@ class Card:
         self.player = None
         self.owner = None
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
     @property
     def mana_cost(self):
         mana = self._mana_cost['current']
