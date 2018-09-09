@@ -3,11 +3,14 @@ TODO: check if needs target with class boolean
 """
 
 from copy import deepcopy
-from utils import remove_duplicates
+
 from Game import GameStatus, main_game
+from utils import remove_duplicates
+
+main_game = main_game
 
 
-def solve(objective: str = "clear battlefield"):
+def solve(objective: str):
     """Algorithm for solving puzzles"""
     global main_game
 
@@ -20,8 +23,8 @@ def solve(objective: str = "clear battlefield"):
         # Set 'active' main_game to popped state
         main_game = deepcopy(status.game)
 
-        # Win condition
-        if main_game.minion_count == 0:
+        # Check win condition
+        if win_conditions[objective]():
             steps = status.steps
             break
 
@@ -49,3 +52,28 @@ def solve(objective: str = "clear battlefield"):
                     main_game = deepcopy(status.game)
 
     return steps
+
+
+# Win condition checkers:
+def check_empty_battlefield():
+    return main_game.minion_count == 0
+
+
+def check_opponent_dead():
+    return main_game.opponent.health == 0
+
+
+def check_mirror():
+    raise NotImplemented
+
+
+def check_full_health():
+    return main_game.player.health == main_game.player._health['base']
+
+
+win_conditions = {
+    "clear board": check_empty_battlefield,
+    "destroy enemy": check_opponent_dead,
+    "mirror": check_mirror,
+    "survive": check_full_health
+}
