@@ -24,6 +24,8 @@ main_game = Game()
 
 
 class GameStatus:
+    count = 0
+
     def __init__(self, game: Game, steps: list = None):
         if game is None:
             game = main_game
@@ -32,3 +34,5 @@ class GameStatus:
         if steps is None:
             steps = []
         self.steps = steps.copy()
+
+        GameStatus.count += 1

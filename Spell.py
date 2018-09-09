@@ -4,7 +4,6 @@ TODO: better exception management (to asserts?)
 """
 
 from Card import Card
-from Game import main_game
 
 
 class Spell(Card):

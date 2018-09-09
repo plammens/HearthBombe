@@ -1,6 +1,3 @@
-from Game import main_game
-
-
 class Card:
     def __init__(self, mana_cost: int):
         self.mana_cost = mana_cost

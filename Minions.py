@@ -47,4 +47,4 @@ class TestSubject(Minion):
 class RadiantElemental(Minion):
     def __init__(self):
         super().__init__(2, 2, 3)
-        self.static_effect = StaticEffect(mana_bias=-1)
+        self.static_effect = StaticEffect(mana_bias={'spells': -1})

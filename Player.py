@@ -1,7 +1,8 @@
 """
 TODO: Hand, Battlefield: change RuntimeError to more specific exception
 """
-from utils import Callable_List
+import Spell
+import Minion
 
 
 class Player:
@@ -87,21 +88,54 @@ class PlayerProperty(list):
 class Hand(PlayerProperty):
     def __init__(self, holder) -> None:
         super().__init__(holder)
-        self._mana_bias = 0
+
+        self._mana_bias_any = 0
+        self._mana_bias_spells = 0
+        self._mana_bias_minions = 0
 
     @property
-    def mana_bias(self):
-        return self._mana_bias
+    def mana_bias_any(self):
+        return self._mana_bias_any
 
-    @mana_bias.setter
-    def mana_bias(self, val):
+    @mana_bias_any.setter
+    def mana_bias_any(self, val: int):
         if type(val) is not int:
             raise TypeError
 
-        self._mana_bias = val
+        self._mana_bias_any = val
 
         for card in self:
-            card.mana_cost = card._mana['base'] + val
+            card.mana_cost = card._mana_cost['base'] + self._mana_bias_any
+
+    @property
+    def mana_bias_spells(self):
+        return self._mana_bias_spells
+
+    @mana_bias_spells.setter
+    def mana_bias_spells(self, val: int):
+        if type(val) is not int:
+            raise TypeError
+
+        self._mana_bias_spells = val
+
+        for card in self:
+            if isinstance(card, Spell.Spell):
+                card.mana_cost = card._mana_cost['base'] + self._mana_bias_spells
+
+    @property
+    def mana_bias_minions(self):
+        return self._mana_bias_minions
+
+    @mana_bias_minions.setter
+    def mana_bias_minions(self, val: int):
+        if type(val) is not int:
+            raise TypeError
+
+        self._mana_bias_minions = val
+
+        for card in self:
+            if isinstance(card, Minion.Minion):
+                card.mana_cost = card._mana_cost['base'] + self._mana_bias_spells
 
     def append(self, card, **kwargs):
         super().append(card, max_cards=10)
@@ -115,6 +149,13 @@ class Battlefield(PlayerProperty):
     def append(self, minion, **kwargs):
         super().append(minion, max_cards=7)
         minion.controller = self.owner
+
+        if minion.static_effect is not None:
+            minion.static_effect.controller = self.owner
+            minion.static_effect.activate()
+        if minion.triggered_effect is not None:
+            minion.triggered_effect.controller = self.owner
+            self.owner.play_spell_effects.append(minion.triggered_effect)
 
     def remove(self, minion):
         super().remove(minion)

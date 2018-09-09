@@ -16,9 +16,14 @@ def solve(objective: str):
 
     states = [GameStatus(main_game)]
 
+    print("Currently inspected:", end='\n')
     while True:
+        print('\r%010d' % GameStatus.count, end='', flush=True)
         # Get top status from stack
-        status = states.pop()
+        try:
+            status = states.pop()
+        except IndexError:
+            return []
 
         # Set 'active' main_game to popped state
         main_game = deepcopy(status.game)
@@ -31,7 +36,13 @@ def solve(objective: str):
         # expand possibilities
         for card in remove_duplicates(main_game.player.hand):
             # Get appropriate card (corresponding to active game object)
-            card = main_game.player.hand.get_card(card)
+            try:
+                card = main_game.player.hand.get_card(card)
+            except LookupError:
+                print(card)
+                print(main_game.player.hand)
+                print(status.steps)
+                raise LookupError
 
             # Check if there is enough mana
             if card.mana_cost <= main_game.player.mana:
@@ -47,7 +58,7 @@ def solve(objective: str):
                     main_game.player.play_card(card, target=target)
 
                     new_status = GameStatus(main_game, status.steps)
-                    new_status.steps.append({'card': type(card), 'target': target})
+                    new_status.steps.append({'card': type(card), 'target': type(target)})
 
                     states.append(new_status)
 

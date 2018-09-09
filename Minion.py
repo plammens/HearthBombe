@@ -3,11 +3,11 @@
 
 import copy
 
-from Card import Card
-from Player import Player
+import Card
+import Player
 
 
-class Minion(Card):
+class Minion(Card.Card):
     def __init__(self, mana_cost: int, attack: int, health: int):
         super(Minion, self).__init__(mana_cost)
 
@@ -57,16 +57,10 @@ class Minion(Card):
 
     @controller.setter
     def controller(self, val):
-        if not (val is None or type(val) is Player):
+        if not (val is None or type(val) is Player.Player):
             raise TypeError
 
         self._controller = val
-
-        if self.static_effect is not None:
-            self.static_effect.controller = self._controller
-        if self.triggered_effect is not None:
-            self.triggered_effect.controller = self._controller
-            self._controller.play_spell_effects.append(self.triggered_effect)
 
     """Methods"""
 
