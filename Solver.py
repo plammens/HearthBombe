@@ -2,7 +2,6 @@
 TODO: check if needs target with class boolean
 """
 
-
 from copy import deepcopy
 
 from Game import GameStatus, main_game
@@ -30,28 +29,24 @@ def solve(objective: str = "clear battlefield"):
         for card in remove_duplicates(main_game.player.hand):
             # Check if there is enough mana
             if card.mana_cost <= main_game.player.mana:
-                # Does it need a target?
-                if hasattr(card, "is_valid_target"):
-                    """Runs if the card needs a target"""
-
-                    for target in \
-                            remove_duplicates([ct for ct in main_game.characters if card.is_valid_target(ct)]):
-                        # Play card
-                        main_game.player.play_card(card, target=target)
-
-                        new_status = GameStatus(main_game, status.steps)
-                        new_status.steps.append({'card': type(card), 'target': target})
-
-                        states.append(new_status)
-
-                        # Reset to previous status (to test with other targets)
-                        main_game = deepcopy(status.game)
+                # Get list of valid targets
+                if hasattr(card, 'is_valid_target'):
+                    valid_targets = [ct for ct in main_game.characters if card.is_valid_target(ct)]
+                    valid_targets = remove_duplicates(valid_targets)
                 else:
-                    """Runs if card doesn't act on a specific target"""
-                    main_game.player.play_card(card)
+                    valid_targets = [None]
+
+                for target in valid_targets:
+                    # Play card
+                    main_game.player.play_card(card, target=target)
 
                     new_status = GameStatus(main_game, status.steps)
-                    new_status.steps.append({'card': type(card), 'target': None})
+                    new_status.steps.append({'card': type(card), 'target': target})
+
+                    states.append(new_status)
+
+                    # Reset to previous status (to test with other targets)
+                    main_game = deepcopy(status.game)
 
     return steps
 
