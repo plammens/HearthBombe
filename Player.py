@@ -26,12 +26,7 @@ class Player:
     def play_card(self, card_blueprint, **kwargs):
         """Play first card in hand with same attributes as card"""
         target = kwargs.get('target', None)
-        for card in self.hand:
-            if card == card_blueprint:
-                card.play(target=target)
-                break
-        else:
-            raise LookupError("Card not found")
+        self.hand.get_card(card_blueprint).play(target=target)
 
 
 class PlayerProperty(list):
@@ -60,6 +55,12 @@ class PlayerProperty(list):
             list.remove(self, card)
         except ValueError:
             raise ValueError("Removing missing card from %s!" % type(self))
+
+    def get_card(self, card_blueprint):
+        for card in self:
+            if card == card_blueprint:
+                return card
+        raise LookupError("Card not found")
 
 
 class Hand(PlayerProperty):
