@@ -29,7 +29,8 @@ class GelbinCoil(Minion):
         def triggered_effect():
             """Deal 1 damage to a random enemy minion"""
             opponent = main_game.opponent if self.controller is main_game.player else main_game.player
-            random.choice(opponent.battlefield).damage(1)
+            if len(opponent.battlefield) > 0:
+                random.choice(opponent.battlefield).damage(1)
 
         self.triggered_effect = TriggeredEffect(triggered_effect)
 
