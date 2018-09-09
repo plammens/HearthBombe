@@ -37,6 +37,5 @@ class Card:
         self._mana_cost['current'] = val
 
     def play(self, **kwargs):
-        assert self.player == main_game.player or self.player == main_game.opponent
         assert self.mana_cost <= self.player.mana, "Not enough mana"
         self.player.mana -= self.mana_cost
