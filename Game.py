@@ -39,9 +39,11 @@ main_game = Game()
 
 
 class GameStatus:
-    def __init__(self, game: Game = None):
+    def __init__(self, game: Game, steps: list = None):
         if game is None:
-            game = deepcopy(main_game)
-        self.game = game
-        self.inspected = False
-        self.steps = []
+            game = main_game
+        self.game = deepcopy(game)
+
+        if steps is None:
+            steps = []
+        self.steps = steps
