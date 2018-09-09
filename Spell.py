@@ -4,13 +4,13 @@ TODO: better exception management (to asserts?)
 """
 
 from Card import Card
-from Game import main_game, Game
+from Game import main_game
 
 
 class Spell(Card):
     def __init__(self, mana_cost: int, **kwargs):
         super(Spell, self).__init__(mana_cost)
-        self.target_types = kwargs.get('target_types', None)
+        self._target_types = kwargs.get('target_types', None)
 
     @property
     def target_types(self):
@@ -18,10 +18,13 @@ class Spell(Card):
 
     @target_types.setter
     def target_types(self, val: set) -> None:
-        if val is None or val.issubset(Game.target_types):
+        """
+        if val is None or val.issubset({Player}):
             self._target_types = val
         else:
             raise ValueError("Invalid target types")
+        """
+        raise NotImplemented
 
     def is_valid_target(self, target) -> bool:
         if target is None and self.target_types is None:
