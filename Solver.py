@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from Game import GameStatus
+from Game import GameStatus, main_game
 
 
 def solve(objective: str = "clear battlefield"):
@@ -46,3 +46,12 @@ def solve(objective: str = "clear battlefield"):
                     new_status.steps.append({'card': type(card), 'target': None})
 
     return steps
+
+
+def remove_duplicates(cards: list):
+    result = []
+    for card in cards:
+        if not any([card == card2 for card2 in result]):
+            result.append(card)
+
+    return result
