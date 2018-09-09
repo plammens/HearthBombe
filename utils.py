@@ -9,10 +9,10 @@ class Callable_List(list):
             raise TypeError
 
 
-def remove_duplicates(cards: list):
+def remove_duplicates(entities: list):
     result = []
-    for card in cards:
-        if not any([card == card2 for card2 in result]):
-            result.append(card)
+    for entity in entities:
+        if not any([entity == oth_entity for oth_entity in result]):
+            result.append(entity)
 
     return result
