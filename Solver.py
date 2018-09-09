@@ -1,28 +1,48 @@
+from copy import deepcopy
+
 from Game import GameStatus
-from Spell import Spell
 
 
-def solve(objective: str):
+def solve(objective: str = "clear battlefield"):
     """Algorithm for solving puzzles"""
     global main_game
 
-    stati = [GameStatus()]
+    states = [GameStatus(main_game)]
 
     while True:
-        status = stati[-1]
+        # Get top status from stack
+        status = states.pop()
 
-        if status.inspected:
-            break
+        # Set 'active' main_game to popped state
+        main_game = deepcopy(status.game)
 
+        # Win condition
         if main_game.minion_count == 0:
+            steps = status.steps
             break
 
         # expand possibilities
         for card in main_game.player.hand:
-            if issubclass(type(card), Spell):
-                for target in [character for character in main_game.characters if card.is_valid_target(character)]:
-                    pass
-            new_status = GameStatus()
-        pass
+            # Check if there is enough mana
+            if card.mana_cost <= main_game.player.mana:
+                if hasattr(card, "is_valid_target"):
+                    """Runs if the card needs a target"""
+                    for target in [character for character in main_game.characters if card.is_valid_target(character)]:
+                        # Play card
+                        card.play(target=target)
+
+                        new_status = GameStatus(main_game, status.steps)
+                        new_status.steps.append({'card': type(card), 'target': target})
+
+                        states.append(new_status)
+
+                        # Reset to previous status (to test with other targets)
+                        main_game = deepcopy(status.game)
+                else:
+                    """Runs if card doesn't act on a specific target"""
+                    card.play()
+
+                    new_status = GameStatus(main_game, status.steps)
+                    new_status.steps.append({'card': type(card), 'target': None})
 
     return steps
