@@ -46,4 +46,4 @@ class GameStatus:
 
         if steps is None:
             steps = []
-        self.steps = steps
+        self.steps = steps.copy()
