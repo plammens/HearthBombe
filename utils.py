@@ -7,3 +7,12 @@ class Callable_List(list):
             list.append(self, val)
         else:
             raise TypeError
+
+
+def remove_duplicates(cards: list):
+    result = []
+    for card in cards:
+        if not any([card == card2 for card2 in result]):
+            result.append(card)
+
+    return result

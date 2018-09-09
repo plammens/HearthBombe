@@ -3,7 +3,7 @@ TODO: check if needs target with class boolean
 """
 
 from copy import deepcopy
-
+from utils import remove_duplicates
 from Game import GameStatus, main_game
 
 
@@ -49,12 +49,3 @@ def solve(objective: str = "clear battlefield"):
                     main_game = deepcopy(status.game)
 
     return steps
-
-
-def remove_duplicates(cards: list):
-    result = []
-    for card in cards:
-        if not any([card == card2 for card2 in result]):
-            result.append(card)
-
-    return result
