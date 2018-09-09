@@ -69,7 +69,7 @@ class Minion(Card):
     def summon(self, controller):
         controller.battlefield.append(self)
 
-    def play(self):
+    def play(self, **kwargs):
         super().play()
         self.battlecry()
         self.summon(self.player)
