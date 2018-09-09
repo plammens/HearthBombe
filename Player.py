@@ -1,6 +1,5 @@
 """
 TODO: Hand, Battlefield: change RuntimeError to more specific exception
-TODO: mana_cost crystals
 """
 
 
