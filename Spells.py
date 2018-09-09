@@ -36,6 +36,9 @@ class VividNightmare(Spell):
 
         super().play(action=action, target=minion)
 
+    def is_valid_target(self, target):
+        return super().is_valid_target(target) and target.controller is not self.player
+
 
 class ShadowWordPain(Spell):
     def __init__(self):
