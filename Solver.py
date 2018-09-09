@@ -30,12 +30,15 @@ def solve(objective: str):
 
         # expand possibilities
         for card in remove_duplicates(main_game.player.hand):
+            # Get appropriate card (corresponding to active game object)
+            card = main_game.player.hand.get_card(card)
+
             # Check if there is enough mana
             if card.mana_cost <= main_game.player.mana:
                 # Get list of valid targets
                 if hasattr(card, 'is_valid_target'):
-                    valid_targets = [ct for ct in main_game.characters if card.is_valid_target(ct)]
-                    valid_targets = remove_duplicates(valid_targets)
+                    valid_targets = [ct for ct in remove_duplicates(main_game.characters)
+                                     if card.is_valid_target(ct)]
                 else:
                     valid_targets = [None]
 
