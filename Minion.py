@@ -18,6 +18,7 @@ class Minion(Card):
 
         self.spells_cast_upon = []
         self.static_effect = None
+        self.triggered_effect = None
 
     def destroy(self):
         self.controller.battlefield.remove(self)
@@ -63,6 +64,9 @@ class Minion(Card):
 
         if self.static_effect is not None:
             self.static_effect.controller = self._controller
+        if self.triggered_effect is not None:
+            self.triggered_effect.controller = self._controller
+            self._controller.play_spell_effects.append(self.triggered_effect)
 
     """Methods"""
 

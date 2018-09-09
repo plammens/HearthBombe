@@ -1,6 +1,7 @@
 """
 TODO: Hand, Battlefield: change RuntimeError to more specific exception
 """
+from utils import Callable_List
 
 
 class Player:
@@ -10,6 +11,11 @@ class Player:
         self.health = 30
         self._mana = {'total': 0, 'available': 0}
 
+        self.play_spell_effects = []
+
+
+    """Properties"""
+
     @property
     def mana(self):
         return self._mana['available']
@@ -18,15 +24,22 @@ class Player:
     def mana(self, val):
         self._mana['available'] = min(max(val, 0), self._mana['total'])
 
+
+    """Methods"""
+
     def play_card_by_index(self, index, **kwargs):
         """Shortcut for playing nth card in hand"""
         target = kwargs.get('target', None)
-        self.hand.pop(index).play(target=target)
+        self.hand[index].play(target=target)
 
     def play_card(self, card_blueprint, **kwargs):
         """Play first card in hand with same attributes as card"""
         target = kwargs.get('target', None)
         self.hand.get_card(card_blueprint).play(target=target)
+
+    def run_spell_effects(self):
+        for effect in self.play_spell_effects:
+            effect.trigger()
 
 
 class PlayerProperty(list):
@@ -99,3 +112,5 @@ class Battlefield(PlayerProperty):
         super().remove(minion)
         if minion.static_effect is not None:
             minion.static_effect.deactivate()
+        if minion.triggered_effect is not None:
+            self.owner.play_spell_effects.remove(minion.triggered_effect)

@@ -6,6 +6,7 @@ import random
 from Game import main_game
 from Minion import Minion
 from StaticEffect import StaticEffect
+from TriggeredEffect import TriggeredEffect
 
 
 class Shadowbeast(Minion):
@@ -25,11 +26,12 @@ class GelbinCoil(Minion):
     def __init__(self):
         super().__init__(1, 1, 2)
 
-        def play_spell_effect():
+        def triggered_effect():
             """Deal 1 damage to a random enemy minion"""
-            random.choice(main_game.opponent.battlefield).damage(1)
+            opponent = main_game.opponent if self.controller is main_game.player else main_game.player
+            random.choice(opponent.battlefield).damage(1)
 
-        main_game.play_spell_effects.append(play_spell_effect)
+        self.triggered_effect = TriggeredEffect(triggered_effect)
 
 
 class TestSubject(Minion):

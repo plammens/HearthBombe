@@ -65,4 +65,4 @@ class Spell(Card):
         action()
 
         # Run any effects like "After you play a spell, [...]"
-        main_game.run_spell_effects()
+        self.player.run_spell_effects()
