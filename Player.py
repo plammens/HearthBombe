@@ -46,7 +46,10 @@ class PlayerProperty(list):
             self.append(card)
 
     def remove(self, card):
-        list.remove(self, card)
+        try:
+            list.remove(self, card)
+        except ValueError:
+            raise ValueError("Removing missing card from %s!" % type(self))
 
 
 class Hand(PlayerProperty):
@@ -72,12 +75,6 @@ class Hand(PlayerProperty):
         super().append(card, max_cards=10)
         card.player = self.owner
 
-    def remove(self, card):
-        try:
-            list.remove(self, card)
-        except ValueError:
-            raise RuntimeError("Removing missing card from hand!")
-
 
 class Battlefield(PlayerProperty):
     def __init__(self, player) -> None:
@@ -88,9 +85,6 @@ class Battlefield(PlayerProperty):
         minion.controller = self.owner
 
     def remove(self, minion):
-        try:
-            list.remove(self, minion)
-            if minion.static_effect is not None:
-                minion.static_effect.deactivate()
-        except ValueError:
-            raise ValueError("Removing missing minion from battlefield!")
+        super().remove(minion)
+        if minion.static_effect is not None:
+            minion.static_effect.deactivate()
