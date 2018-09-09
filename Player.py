@@ -18,10 +18,20 @@ class Player:
     def mana(self, val):
         self._mana['available'] = min(max(val, 0), self._mana['total'])
 
-    def play_card(self, index, **kwargs):
+    def play_card_by_index(self, index, **kwargs):
         """Shortcut for playing nth card in hand"""
         target = kwargs.get('target', None)
         self.hand.pop(index).play(target=target)
+
+    def play_card(self, card_blueprint, **kwargs):
+        """Play first card in hand with same attributes as card"""
+        target = kwargs.get('target', None)
+        for card in self.hand:
+            if card == card_blueprint:
+                card.play(target=target)
+                break
+        else:
+            raise LookupError("Card not found")
 
 
 class PlayerProperty(list):
