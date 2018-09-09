@@ -9,5 +9,8 @@ class TriggeredEffect:
         assert callable(effect)
         self.effect = effect
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
     def trigger(self):
         self.effect()
