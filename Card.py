@@ -7,8 +7,19 @@ class Card:
         self.player = None
         self.owner = None
 
+    eq_ignore = [
+        'player', 'owner', '_controller', 'controller'
+                 ]
+
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        dict1 = self.__dict__.copy()
+        dict2 = other.__dict__.copy()
+
+        for attr in Card.eq_ignore:
+            dict1.pop(attr, None)
+            dict2.pop(attr, None)
+
+        return dict1 == dict2
 
     @property
     def mana_cost(self):
