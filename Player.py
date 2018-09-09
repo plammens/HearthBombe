@@ -5,13 +5,21 @@ from utils import Callable_List
 
 
 class Player:
-    def __init__(self):
-        self.hand = Hand(self)
-        self.battlefield = Battlefield(self)
+    def __new__(cls):
+        self = super().__new__(cls)
+
         self.health = 30
         self._mana = {'total': 0, 'available': 0}
 
+        self.hand = Hand(self)
+        self.battlefield = Battlefield(self)
+
         self.play_spell_effects = []
+
+        return self
+
+    def __getnewargs__(self):
+        return tuple()
 
 
     """Properties"""
