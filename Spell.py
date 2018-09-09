@@ -3,13 +3,16 @@ TODO: add special Spell subclass for spells with targets?
 TODO: better exception management (to asserts?)
 """
 
-from Card import Card
+import Card
+import Minion
 
 
-class Spell(Card):
+class Spell(Card.Card):
+    valid_target_types = {Minion.Minion}
+
     def __init__(self, mana_cost: int, **kwargs):
         super(Spell, self).__init__(mana_cost)
-        self._target_types = kwargs.get('target_types', None)
+        self.target_types = kwargs.get('target_types', None)
 
     @property
     def target_types(self):
@@ -17,13 +20,10 @@ class Spell(Card):
 
     @target_types.setter
     def target_types(self, val: set) -> None:
-        """
-        if val is None or val.issubset({Player}):
-            self._target_types = val
+        if val is None or type(val) is set:
+            self._target_types = val & Spell.valid_target_types
         else:
-            raise ValueError("Invalid target types")
-        """
-        raise NotImplemented
+            raise TypeError("Invalid target types")
 
     def is_valid_target(self, target) -> bool:
         if target is None and self.target_types is None:

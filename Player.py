@@ -45,7 +45,7 @@ class Player:
         target = kwargs.get('target', None)
         self.hand.get_card(card_blueprint).play(target=target)
 
-    def play_card_by_type(self, c_type, **kwargs):
+    def play_card_by_type(self, c_type: type, **kwargs):
         """Play first card in hand of given type"""
         target = kwargs.get('target', None)
         self.hand.get_card_by_type(c_type).play(target=target)
@@ -88,7 +88,7 @@ class PlayerProperty(list):
                 return card
         raise LookupError("Card not found")
 
-    def get_card_by_type(self, c_type):
+    def get_card_by_type(self, c_type: type):
         for card in self:
             if isinstance(card, c_type):
                 return card

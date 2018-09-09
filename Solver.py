@@ -23,7 +23,8 @@ def solve(objective: str):
         try:
             status = states.pop()
         except IndexError:
-            return []
+            steps = []
+            break
 
         # Set 'active' main_game to popped state
         main_game = deepcopy(status.game)
@@ -34,7 +35,7 @@ def solve(objective: str):
             break
 
         # expand possibilities
-        for card in remove_duplicates(main_game.player.hand):
+        for card in deepcopy(remove_duplicates(main_game.player.hand)):
             # Get appropriate card (corresponding to active game object)
             try:
                 card = main_game.player.hand.get_card(card)
@@ -64,7 +65,7 @@ def solve(objective: str):
 
                     # Reset to previous status (to test with other targets)
                     main_game = deepcopy(status.game)
-
+    print()
     return steps
 
 
