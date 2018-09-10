@@ -36,15 +36,6 @@ def solve(objective: str):
 
         # expand possibilities
         for card in deepcopy(remove_duplicates(main_game.player.hand)):
-            # Get appropriate card (corresponding to active game object)
-            try:
-                card = main_game.player.hand.get_card(card)
-            except LookupError:
-                print(card)
-                print(main_game.player.hand)
-                print(status.steps)
-                raise LookupError
-
             # Check if there is enough mana
             if card.mana_cost <= main_game.player.mana:
                 # Get list of valid targets
@@ -65,7 +56,7 @@ def solve(objective: str):
 
                     # Reset to previous status (to test with other targets)
                     main_game = deepcopy(status.game)
-    print()
+    print('\n')
     return steps
 
 
