@@ -16,7 +16,7 @@ class Card:
             dict1.pop(attr, None)
             dict2.pop(attr, None)
 
-        return dict1 == dict2 and type(self) == type(other)
+        return type(self) == type(other) and dict1 == dict2
 
     @property
     def mana_cost(self):
